@@ -1,3 +1,6 @@
+import Mapa from "../../pages/Mapa";
+import ImageUploader from "./ImageUploader";
+
 
 export default function Formulario({ 
   mostrarForm, 
@@ -6,7 +9,9 @@ export default function Formulario({
   setEstado, 
   severidad, 
   setSeveridad, 
-  guardarBache 
+  guardarBache,
+  setFoto
+  
 }) {
   
   // Si no hay que mostrarlo, retornamos null para no renderizar nada
@@ -49,6 +54,12 @@ export default function Formulario({
         <button className="btn btn-secondary" onClick={() => setMostrarForm(false)}>
           Cancelar
         </button>
+
+
+
+        <label className="mt-2">Foto del bache</label>
+
+<       ImageUploader onImageSelect={setFoto} />
       </div>
     </div>
   );

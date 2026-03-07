@@ -4,9 +4,9 @@ function App(){
 
 return(
 
-<div className="container-fluid" style={{ backgroundColor: "#121212", minHeight: "100vh", color: "white" }}>
+<div className="container-fluid" style={{ backgroundColor: "#79b6be", minHeight: "100vh", color: "white" }}>
       <h1 className="text-center pt-3">
-        App Baches 🚧
+        GUALEBACHE APP 🚧
       </h1>
       <Mapa />
     </div>

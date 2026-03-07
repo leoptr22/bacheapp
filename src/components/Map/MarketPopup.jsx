@@ -1,40 +1,68 @@
-
-import React from 'react';
-
 export default function MarkerPopup({ bache, onResolver }) {
-  // Verificación de seguridad por si el bache no llega correctamente
-  if (!bache) return null;
+
+  function colorEstado(estado){
+    switch(estado){
+      case "Reparar": return "danger"
+      case "En reparación": return "warning"
+      case "Solucionado": return "success"
+      default: return "secondary"
+    }
+  }
+
+  function colorSeveridad(sev){
+    switch(sev){
+      case "Alta": return "danger"
+      case "Media": return "warning"
+      case "Baja": return "success"
+      default: return "secondary"
+    }
+  }
 
   return (
-    <div style={{ minWidth: "160px" }}>
-      <h6 className="border-bottom pb-2">Reporte de Bache 🚧</h6>
-      
-      <div className="mb-2">
-        <strong>Dirección:</strong>
-        <p className="text-muted small mb-1">{bache.direccion || "Cargando dirección..."}</p>
-      </div>
+    <div style={{width:"220px"}}>
 
-      <div className="mb-2">
-        <strong>Severidad:</strong> 
-        <span className={`badge ms-2 ${
-          bache.severidad === 'Alta' ? 'bg-danger' : 
-          bache.severidad === 'Media' ? 'bg-warning text-dark' : 'bg-info'
-        }`}>
+      <h6>Bache 🚧</h6>
+
+      {bache.foto ? (
+        <img
+          src={bache.foto}
+          alt="bache"
+          style={{
+            width:"100%",
+            borderRadius:"6px",
+            marginBottom:"6px"
+          }}
+        />
+      ) : (
+        <p>Sin foto</p>
+      )}
+
+      <p style={{fontSize:"12px"}}>
+        <strong>Dirección:</strong><br/>
+        {bache.direccion}
+      </p>
+
+      <p>
+        Estado:{" "}
+        <span className={`badge bg-${colorEstado(bache.estado)}`}>
+          {bache.estado}
+        </span>
+      </p>
+
+      <p>
+        Severidad:{" "}
+        <span className={`badge bg-${colorSeveridad(bache.severidad)}`}>
           {bache.severidad}
         </span>
-      </div>
-
-      <div className="mb-2">
-        <strong>Estado:</strong> 
-        <span className="small">{bache.estado}</span>
-      </div>
+      </p>
 
       <button
-        className="btn btn-success btn-sm w-100 mt-2"
+        className="btn btn-success btn-sm"
         onClick={() => onResolver(bache.id)}
       >
-        Marcar como Resuelto ✅
+        Resuelto
       </button>
+
     </div>
-  );
+  )
 }

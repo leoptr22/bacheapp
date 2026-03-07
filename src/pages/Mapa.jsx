@@ -1,4 +1,6 @@
 import { MapContainer,TileLayer, useMapEvents,useMap} from "react-leaflet";
+import L from "leaflet";
+
 
 import MapView from "../components/Map/MapView";
 import MarkerItem from "../components/Map/MarkerItem";
@@ -44,7 +46,7 @@ function RecentrarMapa({ coords }) {
 
   useEffect(() => {
     if (coords) {
-      map.setView(coords, 16, { animate: true });
+      map.setView(coords, 20, { animate: true });
     }
   }, [coords, map]);
 
@@ -59,6 +61,8 @@ function Mapa() {
   const [mostrarForm, setMostrarForm] = useState(false);
   const [estado, setEstado] = useState("Reparar");
   const [severidad, setSeveridad] = useState("Media");
+
+  const [foto, setFoto] = useState(null);
 
   const [miUbicacion, setMiUbicacion] = useState(null);
   const [precision, setPrecision] = useState(null);
@@ -96,6 +100,7 @@ function Mapa() {
         direccion,
         estado,
         severidad,
+        foto
       },
     ]);
 
@@ -111,7 +116,7 @@ function Mapa() {
 
 
   return (
-    <div className="container-fluid p-0" style={{ width: "'95%", height: "85vh" }}>
+    <div className="container-fluid p-0" style={{  height: "90vh" }}>
 
       {/*  Obtener ubicación */}
       <Geolocation
@@ -121,7 +126,7 @@ function Mapa() {
 
       <MapContainer
         center={[-33.01, -58.52]}
-        zoom={14}
+        zoom={40}
         style={{ height: "100%", width: "100%" }}
       >
 
@@ -163,6 +168,8 @@ function Mapa() {
         severidad={severidad}
         setSeveridad={setSeveridad}
         guardarBache={guardarBache}
+        setFoto={setFoto}
+
       />
 
 
