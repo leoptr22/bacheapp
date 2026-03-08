@@ -1,6 +1,7 @@
-import { MapContainer,TileLayer, useMapEvents,useMap} from "react-leaflet";
+import { MapContainer, TileLayer, useMapEvents, useMap } from "react-leaflet";
 import L from "leaflet";
 
+import supabase from "../services/supabaseClient";
 
 import MapView from "../components/Map/MapView";
 import MarkerItem from "../components/Map/MarkerItem";
@@ -12,7 +13,7 @@ import Geolocation from "./Geolocalizacion";
 import "leaflet/dist/leaflet.css";
 
 
-//  FIX iconos Leaflet (Vite bug)
+// FIX iconos Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -25,7 +26,7 @@ L.Icon.Default.mergeOptions({
 });
 
 
-// 📍 Detectar click en mapa
+// Detectar click en mapa
 function ClickMapa({ setCoordsTemp, setMostrarForm }) {
   useMapEvents({
     click(e) {
@@ -40,13 +41,13 @@ function ClickMapa({ setCoordsTemp, setMostrarForm }) {
 }
 
 
-// 🔄 Recentrar mapa cuando cambia ubicación
+// Recentrar mapa cuando cambia ubicación
 function RecentrarMapa({ coords }) {
   const map = useMap();
 
   useEffect(() => {
     if (coords) {
-      map.setView(coords, 20, { animate: true });
+      map.setView(coords, 18, { animate: true });
     }
   }, [coords, map]);
 
@@ -62,13 +63,25 @@ function Mapa() {
   const [estado, setEstado] = useState("Reparar");
   const [severidad, setSeveridad] = useState("Media");
 
+  const [user, setUser] = useState(null);
   const [foto, setFoto] = useState(null);
 
   const [miUbicacion, setMiUbicacion] = useState(null);
   const [precision, setPrecision] = useState(null);
 
 
-  // 🌍 Reverse geocode
+  // obtener usuario logueado
+  useEffect(() => {
+    async function obtenerUsuario() {
+      const { data } = await supabase.auth.getUser();
+      setUser(data.user);
+    }
+
+    obtenerUsuario();
+  }, []);
+
+
+  // Reverse geocode
   async function obtenerDireccion(lat, lng) {
     try {
       const response = await fetch(
@@ -82,8 +95,9 @@ function Mapa() {
   }
 
 
-  // 💾 Guardar bache
+  // Guardar bache
   async function guardarBache() {
+
     if (!coordsTemp) return;
 
     const direccion = await obtenerDireccion(
@@ -109,58 +123,99 @@ function Mapa() {
   }
 
 
-  //  Resolver bache
+  // Resolver bache
   function resolverBache(id) {
     setBaches((prev) => prev.filter((b) => b.id !== id));
   }
 
 
   return (
-    <div className="container-fluid p-0" style={{  height: "90vh" }}>
 
-      {/*  Obtener ubicación */}
-      <Geolocation
-        setMiUbicacion={setMiUbicacion}
-        setPrecision={setPrecision}
-      />
+    <div
+      style={{
+        height: "calc(100vh - 120px)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+    >
 
-      <MapContainer
-        center={[-33.01, -58.52]}
-        zoom={40}
-        style={{ height: "100%", width: "100%" }}
+      <div
+        style={{
+          width: "1300px",
+          maxWidth: "95%",
+          height: "100%",
+          position: "relative"
+        }}
       >
 
-        <RecentrarMapa coords={miUbicacion} />
+         {user && (
+  <div
+    style={{
+      position: "fixed",
+      top: 20,
+      left: 20,
+      background: "rgba(255,255,255,0.9)",
+      color: "black",
+      padding: "6px 12px",
+      borderRadius: "8px",
+      zIndex: 9999,
+      backdropFilter: "blur(4px)",
+      boxShadow: "0 2px 8px rgba(0,0,0,0.25)"
+    }}
+  >
+    👤 {user.email}
+  </div>
+)}
 
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+
+        <Geolocation
+          setMiUbicacion={setMiUbicacion}
+          setPrecision={setPrecision}
         />
 
-        <ClickMapa
-          setCoordsTemp={setCoordsTemp}
-          setMostrarForm={setMostrarForm}
-        />
 
-        {/*  Mi ubicación */}
-       <MapView miUbicacion={miUbicacion} precision={precision} />
+        <MapContainer
+          center={[-33.01, -58.52]}
+          zoom={18}
+          style={{
+            height: "100%",
+            width: "100%",
+            borderRadius: "12px",
+            boxShadow: "0 15px 40px rgba(0,0,0,0.35)"
+          }}
+        >
 
-        {/*  Baches */}
+          <RecentrarMapa coords={miUbicacion} />
 
-            {baches.map((bache) => (
-        <MarkerItem 
-          key={bache.id} 
-          bache={bache} 
-          onResolver={resolverBache} 
-        />
-           ))}
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
 
-      </MapContainer>
+          <ClickMapa
+            setCoordsTemp={setCoordsTemp}
+            setMostrarForm={setMostrarForm}
+          />
+
+          <MapView
+            miUbicacion={miUbicacion}
+            precision={precision}
+          />
+
+          {baches.map((bache) => (
+            <MarkerItem
+              key={bache.id}
+              bache={bache}
+              onResolver={resolverBache}
+            />
+          ))}
+
+        </MapContainer>
+
+      </div>
 
 
-  {/*  formulario */}
-
-
-      <Formulario 
+      <Formulario
         mostrarForm={mostrarForm}
         setMostrarForm={setMostrarForm}
         estado={estado}
@@ -169,11 +224,7 @@ function Mapa() {
         setSeveridad={setSeveridad}
         guardarBache={guardarBache}
         setFoto={setFoto}
-
       />
-
-
-      
 
     </div>
   );
