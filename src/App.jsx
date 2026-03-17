@@ -44,18 +44,12 @@ function App(){
           }}
               >
 
-      {session && (
-        <button
-          className="btn btn-danger btn-sm position-absolute"
-          style={{ top: 20, right: 20, zIndex: 9999 }}
-          onClick={logout}
-        >
-          Cerrar sesión
-        </button>
-      )}
+   
+        
+      
 
       <h1 className="text-center pt-3">
-        GUALEBACHE 🚧
+        Control y mapeo de baches  🚧
       </h1>
 
       {session ? <Mapa/> : <Login/>}
