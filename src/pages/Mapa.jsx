@@ -124,7 +124,7 @@ function Mapa() {
           }}>
 
 
-           <span>👤</span>
+           <span style={{ fontSize: '16px' }}>👤</span>
             <span>{
               (user?.email?.split("@")[0] || user?.displayName || "Usuario").slice(0, 8)
             }</span>
