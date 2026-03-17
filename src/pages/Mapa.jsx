@@ -113,17 +113,19 @@ function Mapa() {
       }}>
         {user && (
           <div style={{ 
-            background: "rgba(94, 91, 91, 0.9)", 
+            background: "rgba(197, 45, 45, 0.9)", 
             padding: " 10px", 
             borderRadius: "20px", 
-            fontSize: "18px", 
-            fontWeight: "bold", 
+            fontSize: "20px", 
+            fontWeight: "Thin",
             display: "flex", 
             alignItems: "center", 
             gap: "8px"
           }}>
-            <span>👤</span>
-            <span>{user.email.split("@")[0]}</span>
+           <span>👤</span>
+<span>{
+  (user?.email?.split("@")[0] || user?.displayName || "Usuario").slice(0, 6)
+}</span>
           </div>
         )}
 
