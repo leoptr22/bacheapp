@@ -86,22 +86,9 @@ export default function Login() {
     />
 
     {/* Título */}
-    <h1
-      className="text-center"
-      style={{
-        position:"absolute",
-        top:"10%",
-        color:"white",
-        fontWeight:"bold",
-        fontSize:"clamp(24px,5vw,46px)",
-        letterSpacing:"2px",
-        zIndex:2,
-        maxWidth:"90%",
-        textWrap:"balance"
-      }}
-    >
-      Monitoreo de baches en Gualeguaychú
-    </h1>
+     <h1 style={{ fontSize: "20px", fontWeight: "900", color: "#fff", margin: 0, textAlign: "center", flex: 1 }}>
+          GUALE<span style={{ color: "#ffc107" }}>BACHE</span>
+        </h1>
 
     <div 
       className="container position-relative"
