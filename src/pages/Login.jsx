@@ -104,7 +104,7 @@ export default function Login() {
 >
   <span style={{ 
     fontSize: "clamp(30px, 8vw, 50px)", 
-    fontFamily: "'Comic Sans MS', cursive", 
+    fontFamily:  "'Comic Sans MS', 'Comic Sans', cursive", 
   }}>
     GUALE
   </span>
