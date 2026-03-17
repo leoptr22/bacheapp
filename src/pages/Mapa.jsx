@@ -113,8 +113,8 @@ function Mapa() {
       }}>
         {user && (
           <div style={{ 
-            background: "rgba(197, 45, 45, 0.9)", 
-            padding: " 10px", 
+            background: "rgba(223, 38, 31, 0.9)", 
+            padding: " 8px", 
             borderRadius: "20px", 
             fontSize: "20px", 
             fontWeight: "Thin",
