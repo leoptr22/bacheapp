@@ -86,10 +86,36 @@ export default function Login() {
     />
 
     {/* Título */}
-     <h1 style={{ fontSize: "20px", fontWeight: "900", color: "#fff", margin: 0, textAlign: "center", flex: 1 }}>
-          GUALE<span style={{ color: "#ffc107" }}>BACHE</span>
-        </h1>
-
+      <h1
+  style={{
+    position: "absolute",
+    top: "10%",
+    color: "#fff",
+    fontWeight: "900",
+    letterSpacing: "2px",
+    zIndex: 2,
+    maxWidth: "90%",
+    textWrap: "balance",
+    textAlign: "center",
+    margin: 0,
+    left: "50%",
+    transform: "translateX(-50%)"
+  }}
+>
+  <span style={{ 
+    fontSize: "clamp(30px, 8vw, 50px)", 
+    fontFamily: "'Alfa Slab One', cursive" 
+  }}>
+    GUALE
+  </span>
+  <span style={{ 
+    fontSize: "clamp(45px, 12vw, 80px)", 
+    color: "#ffc107",
+    
+  }}>
+    BACHE
+  </span>
+</h1>
     <div 
       className="container position-relative"
       style={{maxWidth:"420px", width:"100%", zIndex:2}}
