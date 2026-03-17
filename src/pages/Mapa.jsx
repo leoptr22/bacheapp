@@ -122,10 +122,12 @@ function Mapa() {
             alignItems: "center", 
             gap: "8px"
           }}>
+
+
            <span>👤</span>
-<span>{
-  (user?.email?.split("@")[0] || user?.displayName || "Usuario").slice(0, 6)
-}</span>
+            <span>{
+              (user?.email?.split("@")[0] || user?.displayName || "Usuario").slice(0, 8)
+            }</span>
           </div>
         )}
 
