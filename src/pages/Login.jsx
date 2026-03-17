@@ -104,7 +104,7 @@ export default function Login() {
 >
   <span style={{ 
     fontSize: "clamp(30px, 8vw, 50px)", 
-    fontFamily: "'Lilita One', cursive", 
+    fontFamily: "'Luckiest Guy', cursive", 
   }}>
     GUALE
   </span>
