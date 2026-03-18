@@ -20,9 +20,8 @@ export default function MarkerItem({ bache, onResolver }) {
     html: `
       <div class="${clase}" style="
         background-color: ${color};
-        /* AUMENTAMOS EL TAMAÑO AQUÍ (de 14px a 24px) */
-        width: 24px;
-        height: 24px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
         border: 3px solid white; /* Borde un poco más grueso */
         box-shadow: 0 0 10px rgba(0,0,0,0.6);
@@ -36,7 +35,6 @@ export default function MarkerItem({ bache, onResolver }) {
 
         @keyframes pulse-red {
           0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.8); }
-          /* ONDA MÁS GRANDE TAMBIÉN */
           70% { box-shadow: 0 0 0 25px rgba(255, 77, 77, 0); }
           100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
         }
