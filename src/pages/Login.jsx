@@ -1,6 +1,6 @@
 import { useState } from "react";
 import supabase from "../services/supabaseClient";
-
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet"></link>
 import fondoLogin from "../assets/1.jpg";
 
 export default function Login() {
