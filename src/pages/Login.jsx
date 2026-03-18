@@ -104,14 +104,14 @@ export default function Login() {
 >
   <span style={{ 
     fontSize: "clamp(30px, 8vw, 50px)", 
-    fontFamily:  "'Comic Sans MS', 'Comic Sans', cursive", 
+    fontFamily: "'Alfa Slab One', cursive" 
   }}>
     GUALE
   </span>
   <span style={{ 
     fontSize: "clamp(45px, 12vw, 80px)", 
     color: "#ffc107",
-    
+      
   }}>
     BACHE
   </span>
